@@ -1,0 +1,30 @@
+//fonts
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap');
+//null-style
+@import "null-style.scss";
+
+//consts-----------------------------
+
+//colors
+$BG: #fff;
+$NOTE-BG: #F9FADA;
+$MENU-LINE: #F4B2B2;
+$LINES: #E5E5E5;
+$LB:#3D3D3D; //light black
+$B: #000; //black
+$G: #8F8E8E; //grey
+$BF: rgba(0, 0, 0, 0.36); //black faded
+//templates
+%br {
+    border-radius: 10px;
+}
+
+//-----------------------------------
+
+//general style======================
+body{
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: $B;
+}
+//===================================
