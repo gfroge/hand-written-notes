@@ -37,6 +37,8 @@ export default {};
   &__title,
   &__content {
     padding: 17px 10px;
+    overflow: hidden;
+    overflow-wrap: break-word;
   }
   &__title {
     font-size: 30px;
