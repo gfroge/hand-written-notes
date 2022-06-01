@@ -1,14 +1,15 @@
 <template>
-  <div class="main-wrapper">
+  <div class="main-wrapper" ref="mainWrapper">
     <my-header
       @showMenu="$store.dispatch('showMenuInAnyCase')"
-      @search="$store.commit('toggleSearchVisibility')" />
+      @search="$store.commit('toggleSearchVisibility')"
+    />
 
-    <search-note v-if="$store.state.isSearchShown"/>
+    <search-note v-if="$store.state.isSearchShown" />
 
     <black-b-g v-if="$store.state.isBlackBgShown" @click="emptySpaceClicked" />
 
-    <sidebar-menu :isActive='isMenuShown'/>
+    <sidebar-menu :isActive="isMenuShown" />
 
     <div class="note-wrapper" v-if="!$store.state.isCreationFormShown">
       <yellow-note>
@@ -242,7 +243,7 @@ import AddNote from "@/components/UI/AddNote.vue";
 import BlackBG from "@/components/UI/BlackBG.vue";
 import MyAutoInput from "@/components/UI/TextareaAutosize.vue";
 import SidebarMenu from "@/components/SidebarMenu.vue";
-import SearchNote from './components/SearchNote.vue';
+import SearchNote from "./components/SearchNote.vue";
 export default {
   name: "App",
   components: {
@@ -253,7 +254,7 @@ export default {
     MyAutoInput,
     QuestionUser,
     SidebarMenu,
-    SearchNote
+    SearchNote,
   },
   data() {
     return {
@@ -267,7 +268,6 @@ export default {
       title: "",
       description: "",
       questionType: "",
-
     };
   },
   methods: {
@@ -292,21 +292,42 @@ export default {
         this.$store.dispatch("showDefaultScreen");
       }
     },
-  //   isFormEmpty(title,description){
-  //     if (title.trim() == '' && description.trim() == '') {
-  //       return true;
-  //     }
-  //     else{
-  //       return false;
-  //     }
-  //   }
+  },
+  mounted() {
+    const isMobile = {
+      Android: function () {
+        return navigator.userAgent.match(/Android/i);
+      },
+      BlackBerry: function () {
+        return navigator.userAgent.match(/BlackBerry/i);
+      },
+      IOS: function () {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+      },
+      Opera: function () {
+        return navigator.userAgent.match(/Opera Mini/i);
+      },
+      Windows: function () {
+        return navigator.userAgent.match(/IEMobile/i);
+      },
+      any: function () {
+        return (
+          isMobile.Android() ||
+          isMobile.BlackBerry() ||
+          isMobile.IOS() ||
+          isMobile.Opera() ||
+          isMobile.Windows()
+        );
+      },
+    };
+    if (isMobile.any()) { 
+      this.$refs.mainWrapper.classList.add('mobile')
+    }
   },
 };
 </script>
 
 <style lang="scss">
-//добавить логику отображения при открытии с пк
-
 .main-wrapper {
   max-width: 392px;
   min-height: 600px;
@@ -315,6 +336,9 @@ export default {
   border: 1px solid $LB;
   border-top: 0;
   position: relative;
+  &.mobile {
+    min-height: 100vh;
+  }
 }
 .note-wrapper {
   padding: 22px 15px;

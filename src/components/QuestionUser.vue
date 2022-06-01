@@ -19,9 +19,7 @@ export default {
       type: String,
       required: true,
     },
-    // isFormEmpty: {
-    //   type: Boolean,
-    // }
+
   },
   methods: {
     deleteOrEdit() {
