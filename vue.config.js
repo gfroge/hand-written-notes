@@ -4,7 +4,7 @@ module.exports = defineConfig({
 })
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/Hand-written-notes/'
+    ? '/hand-written-notes/'
     : '/'
   ,
   css: {
